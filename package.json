@@ -1,11 +1,20 @@
 {
   "name": "seefood",
   "version": "0.1.0",
-  "description": "Hotdog or Not Hotdog?",
+  "description": "A demonstration of the Microsoft Custom Vision Service",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint *.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Tal Ben-Ari <t-tabena@microsoft.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.0.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^5.0.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
 }
