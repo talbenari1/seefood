@@ -4,8 +4,9 @@
   "description": "A demonstration of the Microsoft Custom Vision Service",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint *.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "babel-node index.js",
+    "build": "webpack",
+    "lint": "eslint *.js"
   },
   "author": "Tal Ben-Ari <t-tabena@microsoft.com>",
   "license": "ISC",
@@ -16,5 +17,13 @@
     "eslint-plugin-node": "^5.0.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1"
+  },
+  "dependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.5.2",
+    "superagent": "^3.5.2"
+  },
+  "babel": {
+    "presets": ["env"]
   }
 }
