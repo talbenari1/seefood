@@ -1,20 +1,17 @@
 import request from 'superagent'
-
-const PROJECT_ID = '322976eb-9ab1-4e99-8d84-f2e99a71d765'
-const TRAINING_KEY = '2db255846d014d05917cd9c66a6816c8'
-const PREDICTION_KEY = 'e84dd580648b460cb931f9924ace2cb8'
+import { PROJECT_ID, PREDICTION_KEY } from '../config'
 
 /**
  * Generate an API URL given an endpoint and an optional iteration ID.
- * @param {string} endpoint 
- * @param {*} iterationId 
+ * @param {string} endpoint - the API endpoint to connect to.
+ * @param {string} [iterationId] - the training iteration to use for predictions.
  */
 const genURL = (endpoint, iterationId) =>
   `https://southcentralus.api.cognitive.microsoft.com/customvision/v1.0/Prediction/${PROJECT_ID}/${endpoint}${iterationId ? '?iterationId=' + iterationId : ''}`
 
 /**
  * Predict an image given its URL.
- * @param {*} url 
+ * @param {string} url the URL pointing to the image
  */
 export const predictURL = url => request.post(genURL('url', '09a8f88a-04bf-4108-bef1-ea51e98e6113'))
   .send({ 'Url': url })
