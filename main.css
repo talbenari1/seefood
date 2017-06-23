@@ -33,6 +33,8 @@ h1 {
   cursor: default;
   user-select: none;
   text-align: center;
+
+  font-size: 3em;
 }
 
 #main {
