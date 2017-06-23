@@ -15,9 +15,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // determine if the browser supports the HTML5 camera API
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    // navigator.mediaDevices.enumerateDevices().then(devices => {
+    //   devices = devices.filter(device => device.kind === 'videoinput')
+    //   console.log(devices)
+    // })
+
     // get the best video stream available on the device
-    // TODO: replace with or incorporate enumerateDevices()
-    navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }).then(stream => {
       camera.src = window.URL.createObjectURL(stream)
       camera.play()
 
