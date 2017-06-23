@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // determine if the browser supports the HTML5 camera API
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     // get the best video stream available on the device
-    // TODO: replace with enumerateDevices()
+    // TODO: replace with or incorporate enumerateDevices()
     navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
       camera.src = window.URL.createObjectURL(stream)
       camera.play()
@@ -37,9 +37,8 @@ window.addEventListener('DOMContentLoaded', () => {
             canvas.toBlob(blob => {
               // call the prediction API with the image
               predictFile(blob).then(data => {
-                const prediction = data.body.Predictions[0]
-
                 // perform a simple prediction check and set the banner accordingly
+                const prediction = data.body.Predictions[0]
                 prediction.Tag === 'hotdog' && prediction.Probability > THRESHOLD
                   ? setHeader('rgba(34, 139, 34, 0.7)', 'Hotdog!')
                   : setHeader('rgba(173, 16, 47, 0.7)', 'Not Hotdog!')
@@ -50,25 +49,36 @@ window.addEventListener('DOMContentLoaded', () => {
             })
           })
 
-          // reset the app when the image is clicked
-          canvas.addEventListener('click', () => {
+          /**
+           * Reset the app back to its original form.
+           */
+          const resetApp = () => {
             // remove the image and reset the header
             context.clearRect(0, 0, canvas.width, canvas.height)
             setHeader('rgba(0, 0, 0, 0.8)', 'SeeFood')
 
             // clear the click handler
-            canvas.removeEventListener('click')
-          })
+            canvas.removeEventListener('click', resetApp)
+          }
+
+          // reset the app when the image is clicked
+          canvas.addEventListener('click', resetApp)
         })
 
-        // only show the camera controls once the camera is initialized
+        // only show the camera controls when the camera is ready
         footer.style.display = 'flex'
       })
     }, err => {
+      // there was a problem with getting access to the user's camera
       console.error(err)
     })
   }
 
+  /**
+   * Set the header's background and text.
+   * @param {string} background - the background color to give to the header.
+   * @param {string} text - the text to place in the header.
+   */
   const setHeader = (background, text) => {
     window.requestAnimationFrame(() => {
       header.style.background = background
