@@ -3,6 +3,7 @@ import { THRESHOLD } from '../config'
 
 window.addEventListener('DOMContentLoaded', () => {
   // grab references to all DOM elements needed
+  const takePicture = document.querySelector('#take-picture')
   const camera = document.querySelector('video')
   const canvas = document.querySelector('canvas')
   const footer = document.querySelector('footer')
@@ -28,7 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
         canvas.height = camera.videoHeight
 
         // define the image capture action
-        document.getElementById('take-picture').addEventListener('click', () => {
+        takePicture.addEventListener('click', () => {
           window.requestAnimationFrame(() => {
             // take a picture and draw it on the canvas
             context.drawImage(camera, 0, 0, camera.videoWidth, camera.videoHeight)
